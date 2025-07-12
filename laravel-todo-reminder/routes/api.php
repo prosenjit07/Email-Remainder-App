@@ -20,3 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Todo API Routes
 Route::apiResource('todos', \App\Http\Controllers\TodoController::class);
+
+// Email Logs API Routes
+Route::apiResource('email-logs', \App\Http\Controllers\EmailLogController::class)->only(['index', 'show']);

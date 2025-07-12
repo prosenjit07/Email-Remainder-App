@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo List</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Todo Reminder</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -12,11 +13,14 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card shadow">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                         <h3 class="mb-0">
                             <i class="fas fa-tasks me-2"></i>
                             Todo List Manager
                         </h3>
+                        <a href="/email-logs" class="btn btn-light btn-sm">
+                            <i class="fas fa-envelope me-1"></i>Email Logs
+                        </a>
                     </div>
                     <div class="card-body">
                         <!-- Add Todo Form -->
@@ -95,17 +99,42 @@
         // Load todos
         async function loadTodos() {
             try {
-                const response = await fetch('/api/todos');
+                console.log('Loading todos...');
+                const response = await fetch('/api/todos', {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
                 todos = await response.json();
+                console.log('Todos loaded:', todos);
                 renderTodos();
             } catch (error) {
                 console.error('Error loading todos:', error);
+                document.getElementById('todoList').innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Error loading todos: ${error.message}
+                    </div>
+                `;
             }
         }
 
         // Render todos
         function renderTodos() {
+            console.log('Rendering todos:', todos);
             const todoList = document.getElementById('todoList');
+            
+            if (!todoList) {
+                console.error('Todo list element not found!');
+                return;
+            }
+            
             if (todos.length === 0) {
                 todoList.innerHTML = '<div class="text-center text-muted"><i class="fas fa-inbox fa-3x mb-3"></i><p>No todos yet. Add your first todo!</p></div>';
                 return;
@@ -136,6 +165,8 @@
                     </div>
                 </div>
             `).join('');
+            
+            console.log('Todos rendered successfully');
         }
 
         // Add todo

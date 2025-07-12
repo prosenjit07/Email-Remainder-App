@@ -19,3 +19,6 @@ Route::get('/', function () {
 
 // Todo Web Routes
 Route::resource('todos', \App\Http\Controllers\TodoController::class);
+
+// Email Logs Web Routes
+Route::get('/email-logs', [\App\Http\Controllers\EmailLogController::class, 'index'])->name('email-logs.index');
