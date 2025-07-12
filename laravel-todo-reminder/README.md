@@ -2,6 +2,11 @@
 
 A comprehensive Laravel 11 application that allows users to manage a Todo List with advanced email features and background job processing.
 
+## 🖼️ Application Overview
+
+![Todo List Manager](assets/screenshot/Home_Page.png)
+*Main dashboard with modern UI, recipient email functionality, and real-time todo management.*
+
 ## 🚀 Features
 
 ### Todo List Management (CRUD)
@@ -137,6 +142,24 @@ php artisan migrate
    - Email Logs: `http://localhost:8000/email-logs`
    - API Endpoints: `http://localhost:8000/api/todos`
 
+## 📸 Application Screenshots
+
+### 🏠 Home Page - Todo List Manager
+![Todo List Manager](assets/screenshot/Home_Page.png)
+*Main dashboard showing todo list with recipient email field, add/edit functionality, and email status indicators.*
+
+### 📧 Email Logs Dashboard
+![Email Logs](assets/screenshot/email_log.png)
+*Comprehensive email logging system with statistics, status tracking, and detailed email history.*
+
+### 🔍 Email Details Modal
+![Email Details](assets/screenshot/Email_details.png)
+*Detailed view of individual email logs showing recipient, subject, content, and status information.*
+
+### ✏️ Edit Todo Modal
+![Edit Todo](assets/screenshot/Edit_todo.png)
+*Edit todo form with recipient email field, description, and due date/time management.*
+
 ## 📚 API Endpoints
 
 ### Todos
@@ -230,25 +253,54 @@ laravel-todo-reminder/
 
 ## 🎨 Frontend Email Features
 
-### Add Todo Form
+### 🖥️ User Interface Components
+
+#### **Add Todo Form**
+- **Recipient Email Field**: Required email input with validation
+- **Title Field**: Todo title with character limit
+- **Description Field**: Optional detailed description
+- **Due Date/Time**: DateTime picker for reminder scheduling
+- **Add Button**: Creates todo with all fields
+
+#### **Edit Todo Modal**
+- **Pre-populated Fields**: All existing data loaded
+- **Recipient Email**: Editable email field
+- **Validation**: Real-time form validation
+- **Save/Cancel**: Modal actions for updates
+
+#### **Todo List Display**
+- **Email Status**: Visual indicators for sent reminders
+- **Recipient Email**: Shows target email address
+- **Due Date**: Formatted date/time display
+- **Action Buttons**: Edit and delete functionality
+
+### 📱 Responsive Design
+- **Bootstrap 5**: Modern, mobile-friendly UI
+- **Font Awesome Icons**: Visual indicators and buttons
+- **AJAX Updates**: Real-time data without page refresh
+- **Modal Dialogs**: Clean edit interface
+
+### 🔧 Technical Implementation
+
+#### **Add Todo Form**
 ```html
 <!-- Recipient Email Field -->
 <input type="email" id="recipient_email" class="form-control" placeholder="Recipient email" required>
 ```
 
-### Edit Todo Modal
+#### **Edit Todo Modal**
 ```html
 <!-- Edit form includes recipient email -->
 <input type="email" id="edit_recipient_email" class="form-control" required>
 ```
 
-### Todo Display
+#### **Todo Display**
 ```javascript
 // Shows recipient email in todo list
 To: ${todo.recipient_email || 'No email'}
 ```
 
-### JavaScript Validation
+#### **JavaScript Validation**
 ```javascript
 // Form data includes recipient email
 const formData = {
