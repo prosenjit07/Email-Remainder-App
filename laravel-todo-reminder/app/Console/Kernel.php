@@ -12,7 +12,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        // Check for todo reminders every minute
+        $schedule->command('todos:check-reminders')->everyMinute();
     }
 
     /**

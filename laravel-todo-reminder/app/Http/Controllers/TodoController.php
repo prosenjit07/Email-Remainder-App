@@ -11,10 +11,14 @@ class TodoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index()
     {
-        $todos = Todo::orderBy('due_datetime')->get();
-        return response()->json($todos);
+        if (request()->expectsJson()) {
+            $todos = Todo::orderBy('due_datetime')->get();
+            return response()->json($todos);
+        }
+        
+        return view('todos.index');
     }
 
     /**

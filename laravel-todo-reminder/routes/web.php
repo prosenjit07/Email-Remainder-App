@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Todo Web Routes
+Route::resource('todos', \App\Http\Controllers\TodoController::class);

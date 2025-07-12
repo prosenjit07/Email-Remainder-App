@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Todo API Routes
+Route::apiResource('todos', \App\Http\Controllers\TodoController::class);
