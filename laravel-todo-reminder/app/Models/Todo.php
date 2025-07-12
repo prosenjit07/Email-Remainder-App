@@ -13,6 +13,7 @@ class Todo extends Model
         'title',
         'description',
         'due_datetime',
+        'recipient_email',
         'email_notification_sent',
     ];
 

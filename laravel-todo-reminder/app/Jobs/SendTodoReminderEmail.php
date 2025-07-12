@@ -40,7 +40,7 @@ class SendTodoReminderEmail implements ShouldQueue
 
             // Send email with CSV attachment
             Mail::raw("Your todo '{$this->todo->title}' is due in 10 minutes!", function ($message) use ($csvPath) {
-                $message->to('user@example.com') // You can make this configurable
+                $message->to($this->todo->recipient_email)
                         ->subject("Reminder: {$this->todo->title}")
                         ->attach($csvPath, [
                             'as' => 'api_data.csv',
@@ -50,7 +50,7 @@ class SendTodoReminderEmail implements ShouldQueue
 
             // Log successful email
             EmailLog::create([
-                'to_email' => 'user@example.com',
+                'to_email' => $this->todo->recipient_email,
                 'subject' => "Reminder: {$this->todo->title}",
                 'body' => "Your todo '{$this->todo->title}' is due in 10 minutes!",
                 'status' => 'success',
@@ -66,7 +66,7 @@ class SendTodoReminderEmail implements ShouldQueue
         } catch (\Exception $e) {
             // Log failed email
             EmailLog::create([
-                'to_email' => 'user@example.com',
+                'to_email' => $this->todo->recipient_email,
                 'subject' => "Reminder: {$this->todo->title}",
                 'body' => "Failed to send reminder for todo '{$this->todo->title}'",
                 'status' => 'failed',

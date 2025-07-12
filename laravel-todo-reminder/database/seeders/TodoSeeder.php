@@ -18,30 +18,35 @@ class TodoSeeder extends Seeder
             [
                 'title' => 'Complete Project Documentation',
                 'description' => 'Finish writing the technical documentation for the Laravel Todo application',
+                'recipient_email' => 'developer@example.com',
                 'due_datetime' => now()->addMinutes(15), // Will trigger reminder in 5 minutes
                 'email_notification_sent' => false,
             ],
             [
                 'title' => 'Review Code Changes',
                 'description' => 'Review and approve the latest pull requests',
+                'recipient_email' => 'reviewer@example.com',
                 'due_datetime' => now()->addHours(2),
                 'email_notification_sent' => false,
             ],
             [
                 'title' => 'Team Meeting',
                 'description' => 'Weekly team standup meeting',
+                'recipient_email' => 'team@example.com',
                 'due_datetime' => now()->addDays(1),
                 'email_notification_sent' => false,
             ],
             [
                 'title' => 'Deploy to Production',
                 'description' => 'Deploy the latest version to production environment',
+                'recipient_email' => 'devops@example.com',
                 'due_datetime' => now()->addDays(3),
                 'email_notification_sent' => false,
             ],
             [
                 'title' => 'Test Email Reminder System',
                 'description' => 'Test the email reminder functionality with a todo due in 10 minutes',
+                'recipient_email' => 'test@example.com',
                 'due_datetime' => now()->addMinutes(10), // Will trigger reminder immediately
                 'email_notification_sent' => false,
             ],

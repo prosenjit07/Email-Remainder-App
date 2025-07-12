@@ -26,13 +26,16 @@
                         <!-- Add Todo Form -->
                         <form id="todoForm" class="mb-4">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <input type="text" id="title" class="form-control" placeholder="Todo title" required>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <input type="email" id="recipient_email" class="form-control" placeholder="Recipient email" required>
+                                </div>
+                                <div class="col-md-3">
                                     <input type="datetime-local" id="due_datetime" class="form-control" required>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <button type="submit" class="btn btn-primary w-100">
                                         <i class="fas fa-plus me-2"></i>Add Todo
                                     </button>
@@ -72,6 +75,10 @@
                         <div class="mb-3">
                             <label class="form-label">Title</label>
                             <input type="text" id="edit_title" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Recipient Email</label>
+                            <input type="email" id="edit_recipient_email" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Description</label>
@@ -133,7 +140,7 @@
             if (!todoList) {
                 console.error('Todo list element not found!');
                 return;
-            }
+            }  <!-- Add Todo Form -->
             
             if (todos.length === 0) {
                 todoList.innerHTML = '<div class="text-center text-muted"><i class="fas fa-inbox fa-3x mb-3"></i><p>No todos yet. Add your first todo!</p></div>';
@@ -148,6 +155,9 @@
                                 <h5 class="card-title mb-1">${todo.title}</h5>
                                 <p class="card-text text-muted mb-1">${todo.description || 'No description'}</p>
                                 <small class="text-muted">
+                                    <i class="fas fa-envelope me-1"></i>
+                                    To: ${todo.recipient_email || 'No email'}
+                                    <br>
                                     <i class="fas fa-clock me-1"></i>
                                     Due: ${new Date(todo.due_datetime).toLocaleString()}
                                     ${todo.email_notification_sent ? '<span class="badge bg-success ms-2"><i class="fas fa-envelope me-1"></i>Reminder Sent</span>' : ''}
@@ -176,7 +186,8 @@
             const formData = {
                 title: document.getElementById('title').value,
                 description: document.getElementById('description').value,
-                due_datetime: document.getElementById('due_datetime').value
+                due_datetime: document.getElementById('due_datetime').value,
+                recipient_email: document.getElementById('recipient_email').value
             };
 
             try {
@@ -209,6 +220,7 @@
 
             editingTodo = todo;
             document.getElementById('edit_title').value = todo.title;
+            document.getElementById('edit_recipient_email').value = todo.recipient_email || '';
             document.getElementById('edit_description').value = todo.description || '';
             document.getElementById('edit_due_datetime').value = todo.due_datetime.slice(0, 16);
 
@@ -221,6 +233,7 @@
 
             const formData = {
                 title: document.getElementById('edit_title').value,
+                recipient_email: document.getElementById('edit_recipient_email').value,
                 description: document.getElementById('edit_description').value,
                 due_datetime: document.getElementById('edit_due_datetime').value
             };

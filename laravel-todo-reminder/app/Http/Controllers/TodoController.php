@@ -37,6 +37,7 @@ class TodoController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'recipient_email' => 'required|email',
             'due_datetime' => 'required|date|after:now',
         ]);
 
@@ -69,6 +70,7 @@ class TodoController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'recipient_email' => 'required|email',
             'due_datetime' => 'required|date',
         ]);
 
